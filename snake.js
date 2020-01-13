@@ -63,6 +63,14 @@ class Food {
   }
 }
 
+class Game {
+  constructor (snake, ghostSnake, food) {
+    this.snake = snake;
+    this.ghostSnake = ghostSnake;
+    this.food = food;
+  }
+}
+
 const NUM_OF_COLS = 100;
 const NUM_OF_ROWS = 60;
 
@@ -135,7 +143,9 @@ const randomlyTurnSnake = function (snake) {
   }
 };
 
-const setup = function (snake, ghostSnake, food) {
+const setup = function (game) {
+  const {snake, ghostSnake, food} = game;
+
   attachEventListeners(snake);
   createGrids();
   drawSnake(snake);
@@ -168,7 +178,8 @@ const main = function () {
   const ghostSnake = initGhost();
   const food = new Food(5, 5);
 
-  setup(snake, ghostSnake, food);
+  const game = new Game(snake, ghostSnake, food);
+  setup(game);
 
   setInterval(animateSnakes, 200, snake, ghostSnake);
   setInterval(randomlyTurnSnake, 500, ghostSnake);
