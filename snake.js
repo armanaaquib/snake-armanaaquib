@@ -109,7 +109,14 @@ const attachEventListeners = snake => {
 const animateSnakes = function (snake, ghostSnake) {
   moveAndDrawSnake(snake);
   moveAndDrawSnake(ghostSnake);
-}
+};
+
+const randomlyTurnSnake = function (snake) {
+  let num = Math.random() * 100;
+  if (num > 50) {
+    snake.turnLeft();
+  }
+};
 
 const initSnake = function () {
   const snakePosition = [
@@ -141,11 +148,5 @@ const main = function () {
   drawSnake(ghostSnake);
 
   setInterval(animateSnakes, 200, snake, ghostSnake);
-
-  setInterval(() => {
-    let x = Math.random() * 100;
-    if (x > 50) {
-      ghostSnake.turnLeft();
-    }
-  }, 500);
+  setInterval(randomlyTurnSnake, 500, ghostSnake);
 };
