@@ -50,6 +50,12 @@ class Snake {
 
     this.positions.push([headX + deltaX, headY + deltaY]);
   }
+
+  hasEaten(food) {
+    const [foodColId, foodRowId] = food.position;
+    const head = this.positions[this.positions.length - 1];
+    return head[0] === foodColId && head[1] === foodRowId;
+  }
 }
 
 class Food {
