@@ -92,14 +92,14 @@ const drawSnake = function (snake) {
   });
 };
 
-const handleKeyPress = snake => {
-  snake.turnLeft();
-};
-
 const moveAndDrawSnake = function (snake) {
   snake.move();
   eraseTail(snake);
   drawSnake(snake);
+};
+
+const handleKeyPress = snake => {
+  snake.turnLeft();
 };
 
 const attachEventListeners = snake => {
@@ -116,6 +116,13 @@ const randomlyTurnSnake = function (snake) {
   if (num > 50) {
     snake.turnLeft();
   }
+};
+
+const setup = function (snake, ghostSnake) {
+  attachEventListeners(snake);
+  createGrids();
+  drawSnake(snake);
+  drawSnake(ghostSnake);
 };
 
 const initSnake = function () {
@@ -142,10 +149,7 @@ const main = function () {
   const snake = initSnake();
   const ghostSnake = initGhost();
 
-  attachEventListeners(snake);
-  createGrids();
-  drawSnake(snake);
-  drawSnake(ghostSnake);
+  setup(snake, ghostSnake);
 
   setInterval(animateSnakes, 200, snake, ghostSnake);
   setInterval(randomlyTurnSnake, 500, ghostSnake);
