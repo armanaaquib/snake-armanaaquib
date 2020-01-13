@@ -61,6 +61,11 @@ class Food {
   get position() {
     return [this.colId, this.rowId];
   }
+
+  changePosition() {
+    this.colId = Math.random() * 100;
+    this.rowId = Math.random() * 60;
+  }
 }
 
 class Game {
@@ -111,11 +116,17 @@ const drawSnake = function (snake) {
   });
 };
 
+const eraseFood = function (food) {
+  let [colId, rowId] = food.position;
+  const cell = getCell(colId, rowId);
+  cell.classList.remove('food');
+};
+
 const drawFood = function (food) {
   let [colId, rowId] = food.position;
   const cell = getCell(colId, rowId);
   cell.classList.add('food');
-}
+};
 
 const moveAndDrawSnake = function (snake) {
   snake.move();
@@ -148,8 +159,10 @@ const setup = function (game) {
 
   attachEventListeners(snake);
   createGrids();
+
   drawSnake(snake);
   drawSnake(ghostSnake);
+
   drawFood(food);
 };
 
