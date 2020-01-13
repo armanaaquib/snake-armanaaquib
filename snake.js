@@ -56,6 +56,10 @@ class Snake {
     const head = this.positions[this.positions.length - 1];
     return head[0] === foodColId && head[1] === foodRowId;
   }
+
+  increase() {
+    this.positions.unshift(this.previousTail);
+  }
 }
 
 class Food {
