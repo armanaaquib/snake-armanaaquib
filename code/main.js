@@ -3,96 +3,6 @@ const NORTH = 1;
 const WEST = 2;
 const SOUTH = 3;
 
-class Direction {
-  constructor (initialHeading) {
-    this.heading = initialHeading;
-    this.deltas = {};
-    this.deltas[EAST] = [1, 0];
-    this.deltas[WEST] = [-1, 0];
-    this.deltas[NORTH] = [0, -1];
-    this.deltas[SOUTH] = [0, 1];
-  }
-
-  get delta() {
-    return this.deltas[this.heading];
-  }
-
-  turnLeft() {
-    this.heading = (this.heading + 1) % 4;
-  }
-}
-
-class Snake {
-  constructor (positions, direction, type) {
-    this.positions = positions.slice();
-    this.direction = direction;
-    this.type = type;
-    this.previousTail = [0, 0];
-  }
-
-  get location() {
-    return this.positions.slice();
-  }
-
-  get species() {
-    return this.type;
-  }
-
-  turnLeft() {
-    this.direction.turnLeft();
-  }
-
-  move() {
-    const [headX, headY] = this.positions[this.positions.length - 1];
-    this.previousTail = this.positions.shift();
-
-    const [deltaX, deltaY] = this.direction.delta;
-
-    this.positions.push([headX + deltaX, headY + deltaY]);
-  }
-
-  hasEaten(food) {
-    const [foodColId, foodRowId] = food.position;
-    const head = this.positions[this.positions.length - 1];
-    return head[0] === foodColId && head[1] === foodRowId;
-  }
-
-  increase() {
-    this.positions.unshift(this.previousTail);
-  }
-}
-
-class Food {
-  constructor (colId, rowId) {
-    this.colId = colId;
-    this.rowId = rowId;
-  }
-
-  get position() {
-    return [this.colId, this.rowId];
-  }
-
-  changePosition() {
-    this.colId = Math.round(Math.random() * 100);
-    this.rowId = Math.round(Math.random() * 60);
-  }
-}
-
-class Game {
-  constructor (snake, ghostSnake, food) {
-    this.snake = snake;
-    this.ghostSnake = ghostSnake;
-    this.food = food;
-  }
-
-  update() {
-    if (this.snake.hasEaten(this.food)) {
-      this.food.changePosition();
-      this.snake.increase();
-    }
-  }
-}
-
 const NUM_OF_COLS = 100;
 const NUM_OF_ROWS = 60;
 
@@ -160,12 +70,14 @@ const attachEventListeners = snake => {
 };
 
 const updateGame = function (game) {
-  const {snake, ghostSnake, food} = game;
+  const {snake, ghostSnake, food} = game.status;
 
   eraseFood(food);
   game.update();
-  moveAndDrawSnake(snake);
-  moveAndDrawSnake(ghostSnake);
+  eraseTail(snake);
+  drawSnake(snake);
+  eraseTail(ghostSnake);
+  drawSnake(ghostSnake);
   drawFood(food);
 };
 
@@ -177,7 +89,7 @@ const randomlyTurnSnake = function (snake) {
 };
 
 const setup = function (game) {
-  const {snake, ghostSnake, food} = game;
+  const {snake, ghostSnake, food} = game.status;
 
   attachEventListeners(snake);
   createGrids();
