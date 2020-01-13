@@ -3,13 +3,14 @@ class Snake {
     this.positions = positions.slice();
     this.direction = direction;
     this.type = type;
+    this.previousTail = [0, 0];
   }
 
   get status() {
     return {
       location: this.positions.slice(),
       direction: this.direction,
-      species: this.type
+      species: this.type,
     }
   }
 

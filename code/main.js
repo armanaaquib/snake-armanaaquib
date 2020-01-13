@@ -31,6 +31,7 @@ const createGrids = function () {
 };
 
 const eraseSnake = function (snake) {
+  console.log(snake);
   snake.location.forEach(([colId, rowId]) => {
     const cell = getCell(colId, rowId);
     cell.classList.remove(snake.species);

@@ -3,7 +3,6 @@ class Game {
     this.snake = snake;
     this.ghostSnake = ghostSnake;
     this.food = food;
-    this.previousFood = food;
   }
 
   get snakeStatus() {
@@ -20,18 +19,11 @@ class Game {
     };
   }
 
-  get previousFoodStatus() {
-    return {
-      location: this.previousFood.position.slice()
-    }
-  }
-
   update() {
     this.snake.move();
     this.ghostSnake.move();
 
     if (this.snake.hasEaten(this.food)) {
-      this.previousFood = this.food;
       this.generateFood();
       this.snake.increase();
     }
