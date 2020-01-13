@@ -73,8 +73,8 @@ class Food {
   }
 
   changePosition() {
-    this.colId = Math.random() * 100;
-    this.rowId = Math.random() * 60;
+    this.colId = Math.round(Math.random() * 100);
+    this.rowId = Math.round(Math.random() * 60);
   }
 }
 
@@ -83,6 +83,13 @@ class Game {
     this.snake = snake;
     this.ghostSnake = ghostSnake;
     this.food = food;
+  }
+
+  update() {
+    if (this.snake.hasEaten(this.food)) {
+      this.food.changePosition();
+      this.snake.increase();
+    }
   }
 }
 
@@ -152,9 +159,12 @@ const attachEventListeners = snake => {
   document.body.onkeydown = handleKeyPress.bind(null, snake);
 };
 
-const animateSnakes = function (snake, ghostSnake) {
-  moveAndDrawSnake(snake);
-  moveAndDrawSnake(ghostSnake);
+const updateGame = function (game) {
+  eraseFood(game.food);
+  game.update();
+  moveAndDrawSnake(game.snake);
+  moveAndDrawSnake(game.ghostSnake);
+  drawFood(game.food);
 };
 
 const randomlyTurnSnake = function (snake) {
@@ -204,6 +214,6 @@ const main = function () {
   const game = new Game(snake, ghostSnake, food);
   setup(game);
 
-  setInterval(animateSnakes, 200, snake, ghostSnake);
+  setInterval(updateGame, 200, game);
   setInterval(randomlyTurnSnake, 500, ghostSnake);
 };
