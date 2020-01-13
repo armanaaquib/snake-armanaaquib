@@ -30,10 +30,11 @@ const createGrids = function () {
   }
 };
 
-const eraseTail = function (snake) {
-  let [colId, rowId] = snake.previousTail;
-  const cell = getCell(colId, rowId);
-  cell.classList.remove(snake.species);
+const eraseSnake = function (snake) {
+  snake.location.forEach(([colId, rowId]) => {
+    const cell = getCell(colId, rowId);
+    cell.classList.remove(snake.species);
+  });
 };
 
 const drawSnake = function (snake) {
@@ -44,41 +45,33 @@ const drawSnake = function (snake) {
 };
 
 const eraseFood = function (food) {
-  let [colId, rowId] = food.position;
+  let [colId, rowId] = food.location;
   const cell = getCell(colId, rowId);
   cell.classList.remove('food');
 };
 
 const drawFood = function (food) {
-  let [colId, rowId] = food.position;
+  const [colId, rowId] = food.location;
   const cell = getCell(colId, rowId);
   cell.classList.add('food');
 };
 
-const moveAndDrawSnake = function (snake) {
-  snake.move();
-  eraseTail(snake);
-  drawSnake(snake);
+const erase = function (game) {
+  eraseSnake(game.snakeStatus);
+  eraseSnake(game.ghostSnakeStatus);
+  eraseFood(game.foodStatus);
 };
 
-const handleKeyPress = snake => {
-  snake.turnLeft();
-};
-
-const attachEventListeners = snake => {
-  document.body.onkeydown = handleKeyPress.bind(null, snake);
+const draw = function (game) {
+  drawSnake(game.snakeStatus);
+  drawSnake(game.ghostSnakeStatus);
+  drawFood(game.foodStatus);
 };
 
 const updateGame = function (game) {
-  const {snake, ghostSnake, food} = game.status;
-
-  eraseFood(food);
+  erase(game);
   game.update();
-  eraseTail(snake);
-  drawSnake(snake);
-  eraseTail(ghostSnake);
-  drawSnake(ghostSnake);
-  drawFood(food);
+  draw(game);
 };
 
 const randomlyTurnSnake = function (snake) {
@@ -88,16 +81,18 @@ const randomlyTurnSnake = function (snake) {
   }
 };
 
+const handleKeyPress = game => {
+  game.turnSnakeLeft();
+};
+
+const attachEventListeners = game => {
+  document.body.onkeydown = handleKeyPress.bind(null, game);
+};
+
 const setup = function (game) {
-  const {snake, ghostSnake, food} = game.status;
-
-  attachEventListeners(snake);
+  attachEventListeners(game);
   createGrids();
-
-  drawSnake(snake);
-  drawSnake(ghostSnake);
-
-  drawFood(food);
+  draw(game);
 };
 
 const initSnake = function () {

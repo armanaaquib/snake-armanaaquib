@@ -3,10 +3,27 @@ class Game {
     this.snake = snake;
     this.ghostSnake = ghostSnake;
     this.food = food;
+    this.previousFood = food;
   }
 
-  get status() {
-    return {snake: this.snake, ghostSnake: this.ghostSnake, food: this.food};
+  get snakeStatus() {
+    return this.snake.status;
+  }
+
+  get ghostSnakeStatus() {
+    return this.ghostSnake.status;
+  }
+
+  get foodStatus() {
+    return {
+      location: this.food.position.slice(),
+    };
+  }
+
+  get previousFoodStatus() {
+    return {
+      location: this.previousFood.position.slice()
+    }
   }
 
   update() {
@@ -14,8 +31,20 @@ class Game {
     this.ghostSnake.move();
 
     if (this.snake.hasEaten(this.food)) {
-      this.food.changePosition();
+      this.previousFood = this.food;
+      this.generateFood();
       this.snake.increase();
     }
+  }
+
+  generateFood() {
+    const colId = Math.round(Math.random() * 100);
+    const rowId = Math.round(Math.random() * 60);
+
+    this.food = new Food(colId, rowId);
+  }
+
+  turnSnakeLeft() {
+    this.snake.turnLeft();
   }
 }
