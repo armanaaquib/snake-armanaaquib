@@ -160,11 +160,13 @@ const attachEventListeners = snake => {
 };
 
 const updateGame = function (game) {
-  eraseFood(game.food);
+  const {snake, ghostSnake, food} = game;
+
+  eraseFood(food);
   game.update();
-  moveAndDrawSnake(game.snake);
-  moveAndDrawSnake(game.ghostSnake);
-  drawFood(game.food);
+  moveAndDrawSnake(snake);
+  moveAndDrawSnake(ghostSnake);
+  drawFood(food);
 };
 
 const randomlyTurnSnake = function (snake) {
