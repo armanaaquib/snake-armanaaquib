@@ -29,8 +29,8 @@ class Snake {
 
   hasEaten(food) {
     const [foodColId, foodRowId] = food.position;
-    const head = this.positions[this.positions.length - 1];
-    return head[0] === foodColId && head[1] === foodRowId;
+    const [headColId, headRowId] = this.positions[this.positions.length - 1];
+    return headColId === foodColId && headRowId === foodRowId;
   }
 
   increase() {

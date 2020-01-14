@@ -31,7 +31,6 @@ const createGrids = function () {
 };
 
 const eraseSnake = function (snake) {
-  console.log(snake);
   snake.location.forEach(([colId, rowId]) => {
     const cell = getCell(colId, rowId);
     cell.classList.remove(snake.species);
@@ -57,6 +56,11 @@ const drawFood = function (food) {
   cell.classList.add('food');
 };
 
+const showScore = function (score) {
+  const scoreCard = document.getElementById('score');
+  scoreCard.innerText = score;
+}
+
 const erase = function (game) {
   eraseSnake(game.snakeStatus);
   eraseSnake(game.ghostSnakeStatus);
@@ -67,6 +71,7 @@ const draw = function (game) {
   drawSnake(game.snakeStatus);
   drawSnake(game.ghostSnakeStatus);
   drawFood(game.foodStatus);
+  showScore(game.gameScore)
 };
 
 const updateGame = function (game) {
@@ -124,6 +129,6 @@ const main = function () {
   const game = new Game(snake, ghostSnake, food);
   setup(game);
 
-  setInterval(updateGame, 200, game);
-  setInterval(randomlyTurnSnake, 500, ghostSnake);
+  setInterval(updateGame, 100, game);
+  setInterval(randomlyTurnSnake, 300, ghostSnake);
 };

@@ -26,3 +26,13 @@ h1 {
 .food {
   background-color: black;
 }
+
+.score-block{
+  font-size: 30px;
+  border: 0.1px solid black;
+  height: 50px;
+  width: 150px;
+  margin: 2px auto;
+  text-align: left;
+  padding: 2px;
+}

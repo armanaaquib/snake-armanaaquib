@@ -3,6 +3,7 @@ class Game {
     this.snake = snake;
     this.ghostSnake = ghostSnake;
     this.food = food;
+    this.score = new Score();
   }
 
   get snakeStatus() {
@@ -19,6 +20,10 @@ class Game {
     };
   }
 
+  get gameScore() {
+    return this.score.currentScore;
+  }
+
   update() {
     this.snake.move();
     this.ghostSnake.move();
@@ -26,6 +31,7 @@ class Game {
     if (this.snake.hasEaten(this.food)) {
       this.generateFood();
       this.snake.increase();
+      this.score.increment();
     }
   }
 
