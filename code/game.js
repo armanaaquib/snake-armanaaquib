@@ -1,8 +1,9 @@
 class Game {
-  constructor (snake, ghostSnake, food) {
+  constructor (snake, ghostSnake, food, grid) {
     this.snake = snake;
     this.ghostSnake = ghostSnake;
     this.food = food;
+    this.grid = grid;
     this.scoreCard = new ScoreCard();
   }
 
@@ -53,6 +54,7 @@ class Game {
   isOver() {
     return this.snake.hasTouchedItself() ||
       this.snake.hasTouched(this.ghostSnake) ||
-      this.ghostSnake.hasTouched(this.snake);
+      this.ghostSnake.hasTouched(this.snake) ||
+      this.snake.hasCrossed(this.grid);
   }
 }

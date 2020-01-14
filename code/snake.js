@@ -53,4 +53,11 @@ class Snake {
       return headColId === colId && headRowId === rowId;
     });
   }
+
+  hasCrossed(grid) {
+    const [headColId, headRowId] = this.positions[this.positions.length - 1];
+
+    return headColId >= grid.noOfCols || headColId < 0 ||
+      headRowId >= grid.noOfRows || headRowId < 0;
+  }
 }

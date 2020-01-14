@@ -79,30 +79,29 @@ const initializeGame = function (game) {
   const gameInterval = setInterval(() => {
     erase(game);
     game.update();
-    draw(game);
 
     if (game.isOver()) {
       alert('Game is Over.');
       clearInterval(gameInterval);
+      return;
     }
+
+    draw(game);
 
   }, 100);
 
   const ghostTurnInterval = setInterval(() => {
-    let num = Math.random() * 100;
-    if (num > 50) {
-      game.turnGhostSnakeLeft();
-    }
 
     if (game.isOver()) {
       clearInterval(ghostTurnInterval);
     }
 
+    let num = Math.random() * 100;
+    if (num > 50) {
+      game.turnGhostSnakeLeft();
+    }
+
   }, 300);
-
-};
-
-const randomlyTurnSnake = function (snake) {
 
 };
 
@@ -146,6 +145,7 @@ const main = function () {
   const ghostSnake = initGhost();
   const food = new Food(5, 5);
 
-  const game = new Game(snake, ghostSnake, food);
+  const grid = {noOfCols: 100, noOfRows: 60};
+  const game = new Game(snake, ghostSnake, food, grid);
   setup(game);
 };
