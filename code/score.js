@@ -1,13 +1,13 @@
-class Score {
+class ScoreCard {
   constructor () {
     this.curScore = 0;
   }
 
-  get currentScore() {
+  get score() {
     return this.curScore;
   }
 
-  increment() {
+  updateDefault() {
     this.curScore += 1;
   }
 }

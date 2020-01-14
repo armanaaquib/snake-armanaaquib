@@ -71,7 +71,7 @@ const draw = function (game) {
   drawSnake(game.snakeStatus);
   drawSnake(game.ghostSnakeStatus);
   drawFood(game.foodStatus);
-  showScore(game.gameScore)
+  showScore(game.score)
 };
 
 const initializeGame = function (game) {
