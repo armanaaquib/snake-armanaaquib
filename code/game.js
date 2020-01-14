@@ -36,13 +36,21 @@ class Game {
   }
 
   generateFood() {
-    const colId = Math.round(Math.random() * 100);
-    const rowId = Math.round(Math.random() * 60);
+    const colId = Math.floor(Math.random() * 100);
+    const rowId = Math.floor(Math.random() * 60);
 
     this.food = new Food(colId, rowId);
   }
 
   turnSnakeLeft() {
     this.snake.turnLeft();
+  }
+
+  turnGhostSnakeLeft() {
+    this.ghostSnake.turnLeft();
+  }
+
+  isOver() {
+    return this.snake.hasTouchedItself();
   }
 }

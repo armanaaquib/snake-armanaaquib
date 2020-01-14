@@ -36,4 +36,13 @@ class Snake {
   increase() {
     this.positions.unshift(this.previousTail);
   }
+
+  hasTouchedItself() {
+    const [headColId, headRowId] = this.positions[this.positions.length - 1];
+    const touchablePositions = this.positions.slice(0, this.positions.length - 2);
+
+    return touchablePositions.some(([colId, rowId]) => {
+      return headColId === colId && headRowId === rowId;
+    });
+  }
 }
