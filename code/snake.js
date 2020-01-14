@@ -45,4 +45,12 @@ class Snake {
       return headColId === colId && headRowId === rowId;
     });
   }
+
+  hasTouched(snake) {
+    const [headColId, headRowId] = this.positions[this.positions.length - 1];
+
+    return snake.status.location.some(([colId, rowId]) => {
+      return headColId === colId && headRowId === rowId;
+    });
+  }
 }

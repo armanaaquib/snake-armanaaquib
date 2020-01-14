@@ -51,6 +51,8 @@ class Game {
   }
 
   isOver() {
-    return this.snake.hasTouchedItself();
+    return this.snake.hasTouchedItself() ||
+      this.snake.hasTouched(this.ghostSnake) ||
+      this.ghostSnake.hasTouched(this.snake);
   }
 }
