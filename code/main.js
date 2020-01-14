@@ -143,7 +143,7 @@ const initGhost = function () {
 const main = function () {
   const snake = initSnake();
   const ghostSnake = initGhost();
-  const food = new Food(5, 5);
+  const food = new Food(5, 5, 1);
 
   const grid = {noOfCols: 100, noOfRows: 60};
   const game = new Game(snake, ghostSnake, food, grid);

@@ -32,7 +32,7 @@ class Game {
     if (this.snake.hasEaten(this.food)) {
       this.generateFood();
       this.snake.increase();
-      this.scoreCard.updateDefault();
+      this.scoreCard.update(this.food.point);
     }
   }
 
@@ -40,7 +40,7 @@ class Game {
     const colId = Math.floor(Math.random() * 100);
     const rowId = Math.floor(Math.random() * 60);
 
-    this.food = new Food(colId, rowId);
+    this.food = new Food(colId, rowId, 1);
   }
 
   turnSnakeLeft() {

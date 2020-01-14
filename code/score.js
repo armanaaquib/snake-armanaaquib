@@ -7,7 +7,7 @@ class ScoreCard {
     return this.curScore;
   }
 
-  updateDefault() {
-    this.curScore += 1;
+  update(point) {
+    this.curScore += point;
   }
 }
