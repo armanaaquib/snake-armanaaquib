@@ -1,8 +1,3 @@
-const EAST = 0;
-const NORTH = 1;
-const WEST = 2;
-const SOUTH = 3;
-
 const NUM_OF_COLS = 100;
 const NUM_OF_ROWS = 60;
 
