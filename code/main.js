@@ -89,13 +89,14 @@ const showResult = function (score) {
   container.innerHTML = resultMessage;
 }
 
-const updateGame = function (game, gameInterval) {
+const updateGame = function (game, gameInterval, ghostTurnInterval) {
   erase(game);
   game.update();
 
   if (game.isOver()) {
     showResult(game.score);
     clearInterval(gameInterval);
+    clearInterval(ghostTurnInterval);
     return;
   }
 
@@ -103,12 +104,8 @@ const updateGame = function (game, gameInterval) {
 };
 
 const randomlyTurnGhostSnake = function (game, ghostTurnInterval) {
-
-  if (game.isOver()) {
-    clearInterval(ghostTurnInterval);
-  }
-
   let num = Math.random() * 100;
+
   if (num > 50) {
     game.turnGhostSnakeLeft();
   }
@@ -116,13 +113,14 @@ const randomlyTurnGhostSnake = function (game, ghostTurnInterval) {
 };
 
 const initializeGame = function (game) {
+  const ghostTurnInterval = setInterval(() => {
+    randomlyTurnGhostSnake(game);
+  }, 300);
+
   const gameInterval = setInterval(() => {
-    updateGame(game, gameInterval);
+    updateGame(game, gameInterval, ghostTurnInterval);
   }, 100);
 
-  const ghostTurnInterval = setInterval(() => {
-    randomlyTurnGhostSnake(game, ghostTurnInterval);
-  }, 300);
 };
 
 const handleKeyPress = game => {
