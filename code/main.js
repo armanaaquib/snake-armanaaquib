@@ -89,35 +89,40 @@ const showResult = function (score) {
   container.innerHTML = resultMessage;
 }
 
+const updateGame = function (game, gameInterval) {
+  erase(game);
+  game.update();
+
+  if (game.isOver()) {
+    showResult(game.score);
+    clearInterval(gameInterval);
+    return;
+  }
+
+  draw(game);
+};
+
+const randomlyTurnGhostSnake = function (game, ghostTurnInterval) {
+
+  if (game.isOver()) {
+    clearInterval(ghostTurnInterval);
+  }
+
+  let num = Math.random() * 100;
+  if (num > 50) {
+    game.turnGhostSnakeLeft();
+  }
+
+};
+
 const initializeGame = function (game) {
-
   const gameInterval = setInterval(() => {
-    erase(game);
-    game.update();
-
-    if (game.isOver()) {
-      showResult(game.score);
-      clearInterval(gameInterval);
-      return;
-    }
-
-    draw(game);
-
+    updateGame(game, gameInterval);
   }, 100);
 
   const ghostTurnInterval = setInterval(() => {
-
-    if (game.isOver()) {
-      clearInterval(ghostTurnInterval);
-    }
-
-    let num = Math.random() * 100;
-    if (num > 50) {
-      game.turnGhostSnakeLeft();
-    }
-
+    randomlyTurnGhostSnake(game, ghostTurnInterval);
   }, 300);
-
 };
 
 const handleKeyPress = game => {
