@@ -26,14 +26,28 @@ const createGrids = function () {
 };
 
 const eraseSnake = function (snake) {
-  snake.location.forEach(([colId, rowId]) => {
+  const snakeLength = snake.location.length;
+
+  const [headColId, headRowId] = snake.location[snakeLength - 1];
+  const cell = getCell(headColId, headRowId);
+  cell.classList.remove("snake-head");
+
+  const snakeBodyLocation = snake.location.slice(0, snakeLength - 1);
+  snakeBodyLocation.forEach(([colId, rowId]) => {
     const cell = getCell(colId, rowId);
     cell.classList.remove(snake.species);
   });
 };
 
 const drawSnake = function (snake) {
-  snake.location.forEach(([colId, rowId]) => {
+  const snakeLength = snake.location.length;
+
+  const [headColId, headRowId] = snake.location[snakeLength - 1];
+  const cell = getCell(headColId, headRowId);
+  cell.classList.add("snake-head");
+
+  const snakeBodyLocation = snake.location.slice(0, snakeLength - 1);
+  snakeBodyLocation.forEach(([colId, rowId]) => {
     const cell = getCell(colId, rowId);
     cell.classList.add(snake.species);
   });

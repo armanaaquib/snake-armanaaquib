@@ -24,6 +24,11 @@ h1 {
 }
 
 .snake {
+  background-color: rgb(103, 27, 226);
+  border-radius: 3px;
+}
+
+.snake-head{
   background-color: black;
   border-radius: 4px;
 }
