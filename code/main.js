@@ -85,7 +85,7 @@ const draw = function (game) {
 
 const showResult = function (score) {
   const container = document.getElementsByClassName('container')[0];
-  const resultMessage = '<div class="game-over"><h1>Game Over</h1><label>Score: ' + score + '</label><hr><a href="index.html">Restart</a></div>';
+  const resultMessage = '<div class="game-over"><h1>Game Over</h1><label>Score: ' + score + '</label><hr><button onclick="window.location.reload();">Restart Game</button></div>';
   container.innerHTML = resultMessage;
 }
 

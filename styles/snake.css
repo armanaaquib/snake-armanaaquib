@@ -24,7 +24,7 @@ body{
 }
 
 .snake {
-  background-color: rgb(103, 27, 226);
+  background-color: rgb(37, 30, 47);
   border-radius: 3px;
 }
 
@@ -35,6 +35,7 @@ body{
 
 .ghost {
   background-color: darkgray;
+  border-radius: 2px;
 }
 
 .food {
@@ -71,7 +72,8 @@ body{
   font-size: 50px;
 }
 
-.game-over a{
+.game-over button{
   font-size: 30px;
   color: black;
+  background-color: rgb(227, 202, 250);
 }
