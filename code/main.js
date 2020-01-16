@@ -83,6 +83,12 @@ const draw = function (game) {
   showScore(game.score)
 };
 
+const showResult = function (score) {
+  const container = document.getElementsByClassName('container')[0];
+  const resultMessage = '<div class="game-over"><h1>Game Over</h1><label>Score: ' + score + '</label></div>';
+  container.innerHTML = resultMessage;
+}
+
 const initializeGame = function (game) {
 
   const gameInterval = setInterval(() => {
@@ -90,7 +96,7 @@ const initializeGame = function (game) {
     game.update();
 
     if (game.isOver()) {
-      alert('Game is Over.');
+      showResult(game.score);
       clearInterval(gameInterval);
       return;
     }

@@ -3,7 +3,7 @@ body{
   font-family: sans-serif;
 }
 
-h1 {
+#heading {
   text-align: center;
   font-size: 50px;
   font-weight: 300;
@@ -50,4 +50,23 @@ h1 {
   text-align: center;
   padding: 5px;
   background-color: rgb(148, 245, 169);
+}
+
+.game-over{
+  text-align: center;
+  background-color: grey;
+  width: 800px;
+  margin: 0px auto;
+  padding: 50px;
+}
+
+.game-over h1{
+  color: rgb(250, 100, 100);
+  font-size: 100px;
+  font-weight: 150;
+}
+
+.game-over label{
+  color: rgb(30, 88, 30);
+  font-size: 50px;
 }
