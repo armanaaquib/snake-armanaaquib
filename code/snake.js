@@ -60,4 +60,11 @@ class Snake {
     return headColId >= grid.noOfCols || headColId < 0 ||
       headRowId >= grid.noOfRows || headRowId < 0;
   }
+
+  hasTouchedWall(grid) {
+    const [headColId, headRowId] = this.positions[this.positions.length - 1];
+
+    return headColId === grid.noOfCols - 1 || headColId === 0 ||
+      headRowId === grid.noOfRows - 1 || headRowId === 0;
+  }
 }

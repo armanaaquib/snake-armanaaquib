@@ -34,6 +34,10 @@ class Game {
       this.snake.increase();
       this.scoreCard.update(this.food.point);
     }
+
+    if (this.ghostSnake.hasTouchedWall(this.grid)) {
+      this.turnGhostSnakeLeft();
+    }
   }
 
   generateFood() {
