@@ -33,15 +33,12 @@ class Game {
   update() {
     this.#snake.move();
     this.#ghostSnake.move();
+    this.#ghostSnake.wrapMove(this.#grid);
 
     if (this.#snake.hasEaten(this.#food)) {
       this.generateFood();
       this.#snake.increase();
       this.#scoreCard.update(this.#food.point);
-    }
-
-    if (this.#ghostSnake.hasTouchedWall(this.#grid)) {
-      this.turnGhostSnakeLeft();
     }
   }
 

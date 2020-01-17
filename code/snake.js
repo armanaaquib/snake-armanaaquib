@@ -31,6 +31,16 @@ class Snake {
     this.#positions.push([headX + deltaX, headY + deltaY]);
   }
 
+  wrapMove(grid) {
+    const snakeLength = this.#positions.length;
+
+    let [headX, headY] = this.#positions[snakeLength - 1];
+    headX = (headX + grid.noOfCols) % grid.noOfCols;
+    headY = (headY + grid.noOfRows) % grid.noOfRows;
+
+    this.#positions[snakeLength - 1] = [headX, headY];
+  }
+
   hasEaten(food) {
     const [foodColId, foodRowId] = food.position;
     const [headColId, headRowId] = this.#positions[this.#positions.length - 1];
@@ -65,10 +75,4 @@ class Snake {
       headRowId >= grid.noOfRows || headRowId < 0;
   }
 
-  hasTouchedWall(grid) {
-    const [headColId, headRowId] = this.#positions[this.#positions.length - 1];
-
-    return headColId === grid.noOfCols - 1 || headColId === 0 ||
-      headRowId === grid.noOfRows - 1 || headRowId === 0;
-  }
 }

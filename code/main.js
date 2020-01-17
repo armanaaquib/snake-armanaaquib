@@ -115,7 +115,7 @@ const randomlyTurnGhostSnake = function (game, ghostTurnInterval) {
 const initializeGame = function (game) {
   const ghostTurnInterval = setInterval(() => {
     randomlyTurnGhostSnake(game);
-  }, 300);
+  }, 500);
 
   const gameInterval = setInterval(() => {
     updateGame(game, gameInterval, ghostTurnInterval);
