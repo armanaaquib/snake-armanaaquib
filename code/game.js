@@ -62,8 +62,8 @@ class Game {
     this.#food = new Food([colId, rowId], 'special-food', 10);
   }
 
-  turnSnakeLeft() {
-    this.#snake.turnLeft();
+  turnSnake(direction) {
+    this.#snake['turn' + direction]();
   }
 
   turnGhostSnakeLeft() {

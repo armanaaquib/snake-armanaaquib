@@ -123,12 +123,15 @@ const initializeGame = function (game) {
 
 };
 
-const handleKeyPress = game => {
-  game.turnSnakeLeft();
+const handleKeyPress = (event, game) => {
+  const keyTurnMap = {37: 'Left', 39: 'Right'};
+  const direction = keyTurnMap[event.keyCode];
+
+  direction && game.turnSnake(direction);
 };
 
 const attachEventListeners = game => {
-  document.body.onkeydown = handleKeyPress.bind(null, game);
+  document.body.onkeydown = () => handleKeyPress(event, game);
 };
 
 const setup = function (game) {
