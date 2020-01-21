@@ -4,12 +4,14 @@ class Game {
   #food;
   #grid;
   #scoreCard;
+  #noOfEatenFood;
   constructor (snake, ghostSnake, food, grid) {
     this.#snake = snake;
     this.#ghostSnake = ghostSnake;
     this.#food = food;
     this.#grid = grid;
     this.#scoreCard = new ScoreCard();
+    this.#noOfEatenFood = 0;
   }
 
   get snakeStatus() {
@@ -34,9 +36,15 @@ class Game {
     this.#ghostSnake.wrapMove(this.#grid);
 
     if (this.#snake.hasEaten(this.#food.status)) {
-      this.#snake.increase();
+
+      if (this.#food.status.type === 'food') {
+        this.#snake.increase();
+      }
+
+      this.#noOfEatenFood += 1;
       this.#scoreCard.update(this.#food.status.point);
-      this.generateFood();
+      const createFood = this.#noOfEatenFood % 5 === 0 ? () => this.generateSpecialFood() : () => this.generateFood();
+      createFood();
     }
   }
 
@@ -45,6 +53,13 @@ class Game {
     const rowId = Math.floor(Math.random() * 60);
 
     this.#food = new Food([colId, rowId], 'food', 1);
+  }
+
+  generateSpecialFood() {
+    const colId = Math.floor(Math.random() * 100);
+    const rowId = Math.floor(Math.random() * 60);
+
+    this.#food = new Food([colId, rowId], 'special-food', 10);
   }
 
   turnSnakeLeft() {
