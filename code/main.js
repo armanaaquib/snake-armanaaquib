@@ -56,13 +56,13 @@ const drawSnake = function (snake) {
 const eraseFood = function (food) {
   let [colId, rowId] = food.location;
   const cell = getCell(colId, rowId);
-  cell.classList.remove('food');
+  cell.classList.remove(food.type);
 };
 
 const drawFood = function (food) {
   const [colId, rowId] = food.location;
   const cell = getCell(colId, rowId);
-  cell.classList.add('food');
+  cell.classList.add(food.type);
 };
 
 const showScore = function (score) {
@@ -161,7 +161,7 @@ const initGhost = function () {
 const main = function () {
   const snake = initSnake();
   const ghostSnake = initGhost();
-  const food = new Food(5, 5, 1);
+  const food = new Food([5, 5], 'food', 1);
 
   const grid = {noOfCols: 100, noOfRows: 60};
   const game = new Game(snake, ghostSnake, food, grid);

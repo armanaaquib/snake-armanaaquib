@@ -1,18 +1,18 @@
 class Food {
-  #colId;
-  #rowId;
+  #location;
+  #type;
   #value;
-  constructor (colId, rowId, value) {
-    this.#colId = colId;
-    this.#rowId = rowId;
+  constructor (location, type, value) {
+    this.#location = location.slice();
+    this.#type = type;
     this.#value = value;
   }
 
-  get position() {
-    return [this.#colId, this.#rowId];
-  }
-
-  get point() {
-    return this.#value;
+  get status() {
+    return {
+      location: this.#location.slice(),
+      point: this.#value,
+      type: this.#type
+    }
   }
 }

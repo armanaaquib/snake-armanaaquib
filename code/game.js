@@ -21,9 +21,7 @@ class Game {
   }
 
   get foodStatus() {
-    return {
-      location: this.#food.position.slice(),
-    };
+    return this.#food.status;
   }
 
   get score() {
@@ -35,10 +33,10 @@ class Game {
     this.#ghostSnake.move();
     this.#ghostSnake.wrapMove(this.#grid);
 
-    if (this.#snake.hasEaten(this.#food)) {
-      this.generateFood();
+    if (this.#snake.hasEaten(this.#food.status)) {
       this.#snake.increase();
-      this.#scoreCard.update(this.#food.point);
+      this.#scoreCard.update(this.#food.status.point);
+      this.generateFood();
     }
   }
 
@@ -46,7 +44,7 @@ class Game {
     const colId = Math.floor(Math.random() * 100);
     const rowId = Math.floor(Math.random() * 60);
 
-    this.#food = new Food(colId, rowId, 1);
+    this.#food = new Food([colId, rowId], 'food', 1);
   }
 
   turnSnakeLeft() {

@@ -43,6 +43,10 @@ body{
   border-radius: 2px;
 }
 
+.special-food{
+  background-color: brown;
+}
+
 .score-block{
   font-size: 30px;
   border: 0.1px solid black;
